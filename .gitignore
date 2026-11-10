@@ -1,0 +1,25 @@
+# OS & Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Dependencies & External Clones
+node_modules/
+api-anything/
+
+# Private / Case-Specific Dossiers & Generated Word Documents (Excluded from GitHub)
+dossiers/*
+!dossiers/.gitkeep
+ThuTucDatDaiXD/
+*.docx
+~$*.docx
+
+# Environment & Temporary files
+.env
+.env.*
+*.log
+tmp/
+scratch/

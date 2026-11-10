@@ -1,0 +1,34 @@
+{
+  "name": "vn-legal-360-skills",
+  "version": "1.0.0",
+  "description": "Bộ 5 Agent Skills & CLI Engine rà soát toàn diện 360° văn bản quy phạm pháp luật Việt Nam (vbpl.vn), kiểm toán trích dẫn 2 lớp (6 Gates), theo dõi biến động tự động và xuất hồ sơ hành chính chuẩn .docx (Nghị định 30/2020/NĐ-CP) dựa trên api-anything.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sotacom/vn-legal-360-skills.git"
+  },
+  "homepage": "https://github.com/sotacom/vn-legal-360-skills#readme",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "init-dossier": "node scripts/vbpl-engine.mjs init-dossier",
+    "discover": "node scripts/vbpl-engine.mjs discover",
+    "read-doc": "node scripts/vbpl-engine.mjs read-doc",
+    "locate-citation": "node scripts/vbpl-engine.mjs locate-citation",
+    "audit": "node scripts/vbpl-qc-audit.mjs audit",
+    "verify-file": "node scripts/vbpl-qc-audit.mjs verify-file",
+    "watch": "node scripts/vbpl-watch.mjs scan"
+  },
+  "keywords": [
+    "vietnam-law",
+    "vbpl",
+    "legal-tech",
+    "compliance",
+    "agent-skills",
+    "api-anything",
+    "mcp"
+  ]
+}

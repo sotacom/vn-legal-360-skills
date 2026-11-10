@@ -1,0 +1,46 @@
+{
+  "slug": "ten-chu-de-mau",
+  "title": "Tên Chủ đề / Ngành nghề Kinh doanh cần Rà soát 360°",
+  "location": {
+    "provinceName": "Tên Tỉnh / Thành phố",
+    "formerProvinceName": "Tên Tỉnh cũ trước sáp nhập (nếu có)",
+    "provinceIds": []
+  },
+  "requiresMergerAnalysis": false,
+  "graphExpansionFilter": "từ khóa chuyên ngành 1|từ khóa chuyên ngành 2|phòng cháy|môi trường|hóa đơn",
+  "pillars": {
+    "P1_ENTITY_LICENSING": {
+      "seedNumbers": ["59/2020/QH14", "61/2020/QH14", "31/2024/QH15"],
+      "keywords": ["đăng ký doanh nghiệp", "đầu tư", "sử dụng đất kết hợp đa mục đích"]
+    },
+    "P2_SECTOR_CONDITIONS": {
+      "seedNumbers": [],
+      "keywords": ["từ khóa điều kiện kinh doanh chuyên ngành"]
+    },
+    "P3_PREMISES_TECH_PCCC": {
+      "seedNumbers": ["55/2024/QH15", "105/2025/NĐ-CP"],
+      "keywords": ["phòng cháy và chữa cháy", "quy chuẩn kỹ thuật"]
+    },
+    "P4_MEASUREMENT_QUALITY_DATA": {
+      "seedNumbers": [],
+      "keywords": ["đo lường", "niêm yết giá", "thời gian hoạt động"]
+    },
+    "P5_TAX_INVOICE_FINANCE": {
+      "seedNumbers": ["123/2020/NĐ-CP", "70/2025/NĐ-CP"],
+      "keywords": ["hóa đơn, chứng từ", "thuế giá trị gia tăng"]
+    },
+    "P6_LABOR_INSURANCE_TRAINING": {
+      "seedNumbers": ["45/2019/QH14", "41/2024/QH15"],
+      "keywords": ["bộ luật lao động", "bảo hiểm xã hội", "an toàn, vệ sinh lao động"]
+    },
+    "P7_ENVIRONMENT_ANCILLARY_LOCAL": {
+      "seedNumbers": ["72/2020/QH14", "08/2022/NĐ-CP"],
+      "keywords": ["bảo vệ môi trường"],
+      "localKeywords": ["từ khóa văn bản UBND tỉnh"]
+    },
+    "P8_PENALTIES_INSPECTION": {
+      "seedNumbers": ["125/2020/NĐ-CP", "122/2021/NĐ-CP", "45/2022/NĐ-CP", "123/2024/NĐ-CP"],
+      "keywords": ["xử phạt vi phạm hành chính"]
+    }
+  }
+}

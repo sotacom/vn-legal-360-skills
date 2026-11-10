@@ -1,0 +1,50 @@
+{
+  "documents": [
+    {
+      "filename": "01_Don_De_Nghi_Mau.docx",
+      "elements": [
+        {
+          "type": "header_quoc_hieu",
+          "date_line": "..., ngày ...... tháng ...... năm 202..."
+        },
+        {
+          "type": "title",
+          "text": "ĐƠN ĐỀ NGHỊ ................................................",
+          "subtitle": "(Theo Mẫu số ... ban hành kèm theo Nghị định số .../.../NĐ-CP)"
+        },
+        {
+          "type": "runs_p",
+          "align": "center",
+          "runs": [
+            { "text": "Kính gửi: ", "bold": true },
+            { "text": "........................................................................................", "bold": true }
+          ]
+        },
+        {
+          "type": "p",
+          "text": "1. Tổ chức / Cá nhân đề nghị: ................................................................................",
+          "bold": true
+        },
+        {
+          "type": "p",
+          "text": "2. Nội dung đề nghị: .................................................................................................."
+        },
+        {
+          "type": "table",
+          "headers": ["STT", "Tên tài liệu đính kèm", "Số lượng / Hình thức", "Ghi chú"],
+          "col_pcts": [500, 2300, 1100, 1100],
+          "rows": [
+            ["1", "Văn bản / Phương án thuyết minh", "01 Bản chính", "Đã ký, đóng dấu"],
+            ["2", "Bản sao Giấy chứng nhận có liên quan", "01 Bản sao chứng thực", "Mang bản chính đối chiếu"]
+          ]
+        },
+        {
+          "type": "signature",
+          "left_lines": ["- Như kính gửi;", "- Lưu: HS."],
+          "right_title": "NGƯỜI LÀM ĐƠN",
+          "right_sub": "(Ký, ghi rõ họ tên và đóng dấu nếu có)"
+        }
+      ]
+    }
+  ]
+}

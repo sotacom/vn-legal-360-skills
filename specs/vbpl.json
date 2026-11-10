@@ -1,0 +1,856 @@
+{
+  "name": "vbpl",
+  "displayName": "CSDL Quốc gia về Pháp luật (vbpl.vn)",
+  "baseUrl": "https://vbpl.vn",
+  "description": "Cơ sở dữ liệu quốc gia về văn bản quy phạm pháp luật Việt Nam (Bộ Tư pháp): tra cứu văn bản Trung ương & Địa phương, thuộc tính hiệu lực, toàn văn, lược đồ quan hệ hiệu lực (căn cứ, sửa đổi, bổ sung, thay thế, hướng dẫn, hợp nhất), lịch sử hiệu lực, cây điều khoản và văn bản sắp có hiệu lực.",
+  "pace": {
+    "minIntervalMs": 200,
+    "perHour": 1800
+  },
+  "operations": [
+    {
+      "name": "searchDocuments",
+      "description": "Tìm kiếm văn bản pháp luật trên vbpl.vn theo từ khóa, phạm vi tìm (all, title, number, content), chế độ khớp (all_words, exact_phrase) và phân trang.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "c529d164f28418e5898a834422629e64c6816af1",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/trung-uong",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[{\"keyword\":\"{keyword}\",\"optionDoc\":\"{optionDoc}\",\"matchMode\":\"{matchMode}\",\"pageNumber\":1,\"pageSize\":20,\"score\":true}]"
+      },
+      "slots": [
+        {
+          "param": "keyword",
+          "at": ["body", "json:/0/keyword"]
+        },
+        {
+          "param": "optionDoc",
+          "at": ["body", "json:/0/optionDoc"]
+        },
+        {
+          "param": "matchMode",
+          "at": ["body", "json:/0/matchMode"]
+        },
+        {
+          "param": "pageNumber",
+          "at": ["body", "json:/0/pageNumber"]
+        },
+        {
+          "param": "pageSize",
+          "at": ["body", "json:/0/pageSize"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/trung-uong?keyword={keyword}"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\{)"
+        },
+        "extract": "items",
+        "key": "id",
+        "pick": [
+          "id",
+          "docNum",
+          "title",
+          "issueDate",
+          "effFrom",
+          "effTo",
+          "effStatus=effStatus.name",
+          "effStatusCode=effStatus.code",
+          "docType=docType.name",
+          "docTypeCode=docType.code",
+          "isNew"
+        ]
+      },
+      "params": [
+        {
+          "name": "keyword",
+          "type": "string",
+          "required": true,
+          "description": "Từ khóa hoặc số hiệu văn bản cần tìm (VD: 'kinh doanh xăng dầu' hoặc '83/2014/NĐ-CP')",
+          "example": "kinh doanh xăng dầu"
+        },
+        {
+          "name": "optionDoc",
+          "type": "string",
+          "required": false,
+          "default": "all",
+          "enum": ["all", "title", "number", "content"],
+          "description": "Phạm vi tìm kiếm: all (tất cả), title (trích yếu/tiêu đề), number (số ký hiệu), content (toàn văn)",
+          "example": "title"
+        },
+        {
+          "name": "matchMode",
+          "type": "string",
+          "required": false,
+          "default": "exact_phrase",
+          "enum": ["all_words", "exact_phrase"],
+          "description": "Chế độ khớp từ khóa: exact_phrase (chính xác cụm từ) hoặc all_words (tất cả từ)",
+          "example": "exact_phrase"
+        },
+        {
+          "name": "pageNumber",
+          "type": "number",
+          "required": false,
+          "default": 1,
+          "min": 1,
+          "description": "Số trang (bắt đầu từ 1)",
+          "example": 1
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "required": false,
+          "default": 20,
+          "min": 1,
+          "max": 50,
+          "description": "Số kết quả mỗi trang",
+          "example": 20
+        }
+      ],
+      "paging": {
+        "param": "pageNumber"
+      },
+      "links": [
+        {
+          "from": "id",
+          "to": { "op": "getDocumentAttributes", "arg": "documentId" }
+        },
+        {
+          "from": "id",
+          "to": { "op": "getDocumentFullText", "arg": "documentId" }
+        },
+        {
+          "from": "id",
+          "to": { "op": "getDocumentDiagram", "arg": "documentId" }
+        },
+        {
+          "from": "id",
+          "to": { "op": "getDocumentHistory", "arg": "documentId" }
+        },
+        {
+          "from": "id",
+          "to": { "op": "getDocumentProvisionsTree", "arg": "documentId" }
+        },
+        {
+          "from": "id",
+          "to": { "op": "getConsolidatedGroups", "arg": "documentId" }
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "searchLocalDocuments",
+      "description": "Tìm kiếm văn bản quy phạm pháp luật Địa phương (HĐND, UBND tỉnh/thành phố) theo mã định danh tỉnh (administrativeUnit) và từ khóa.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "c529d164f28418e5898a834422629e64c6816af1",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/dia-phuong",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[{\"keyword\":\"{keyword}\",\"optionDoc\":\"{optionDoc}\",\"matchMode\":\"{matchMode}\",\"agencyLevel\":\"DP\",\"administrativeUnit\":\"{administrativeUnit}\",\"pageNumber\":1,\"pageSize\":20,\"score\":true}]"
+      },
+      "slots": [
+        {
+          "param": "keyword",
+          "at": ["body", "json:/0/keyword"]
+        },
+        {
+          "param": "optionDoc",
+          "at": ["body", "json:/0/optionDoc"]
+        },
+        {
+          "param": "matchMode",
+          "at": ["body", "json:/0/matchMode"]
+        },
+        {
+          "param": "administrativeUnit",
+          "at": ["body", "json:/0/administrativeUnit"]
+        },
+        {
+          "param": "pageNumber",
+          "at": ["body", "json:/0/pageNumber"]
+        },
+        {
+          "param": "pageSize",
+          "at": ["body", "json:/0/pageSize"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/dia-phuong?keyword={keyword}&provinceId={administrativeUnit}"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\{)"
+        },
+        "extract": "items",
+        "key": "id",
+        "pick": [
+          "id",
+          "docNum",
+          "title",
+          "issueDate",
+          "effFrom",
+          "effTo",
+          "effStatus=effStatus.name",
+          "effStatusCode=effStatus.code",
+          "docType=docType.name"
+        ]
+      },
+      "params": [
+        {
+          "name": "keyword",
+          "type": "string",
+          "required": true,
+          "description": "Từ khóa tìm kiếm (VD: 'xăng dầu', 'trò chơi điện tử')",
+          "example": "xăng dầu"
+        },
+        {
+          "name": "administrativeUnit",
+          "type": "string",
+          "required": true,
+          "description": "UUID của Tỉnh/Thành phố từ listProvinces (VD: 'dd35eb78-fc91-4d1a-acdf-c8c48c9578ac' cho Tỉnh Đồng Tháp)",
+          "example": "dd35eb78-fc91-4d1a-acdf-c8c48c9578ac"
+        },
+        {
+          "name": "optionDoc",
+          "type": "string",
+          "required": false,
+          "default": "all",
+          "enum": ["all", "title", "number", "content"],
+          "example": "title"
+        },
+        {
+          "name": "matchMode",
+          "type": "string",
+          "required": false,
+          "default": "exact_phrase",
+          "enum": ["all_words", "exact_phrase"],
+          "example": "exact_phrase"
+        },
+        {
+          "name": "pageNumber",
+          "type": "number",
+          "required": false,
+          "default": 1,
+          "min": 1,
+          "example": 1
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "required": false,
+          "default": 20,
+          "min": 1,
+          "max": 50,
+          "example": 20
+        }
+      ],
+      "paging": {
+        "param": "pageNumber"
+      },
+      "links": [
+        {
+          "from": "id",
+          "to": { "op": "getDocumentAttributes", "arg": "documentId" }
+        },
+        {
+          "from": "id",
+          "to": { "op": "getDocumentFullText", "arg": "documentId" }
+        },
+        {
+          "from": "id",
+          "to": { "op": "getDocumentDiagram", "arg": "documentId" }
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "getDocumentAttributes",
+      "description": "Lấy toàn bộ thuộc tính (metadata) của văn bản pháp luật theo documentId: số ký hiệu, trích yếu, loại văn bản, cơ quan ban hành, người ký, ngày ban hành, ngày có hiệu lực, tình trạng hiệu lực, lĩnh vực, ghi chú áp dụng.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "0fb12b3561faa05adec51a82efb3e4f4f427f07b",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/chi-tiet/37012",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[\"{documentId}\"]"
+      },
+      "slots": [
+        {
+          "param": "documentId",
+          "at": ["body", "json:/0"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/chi-tiet/{documentId}"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n|</html>\\s*)1:(\\{\"id\":)"
+        },
+        "pick": [
+          "id",
+          "docNum",
+          "title",
+          "docType=docType.name",
+          "docTypeCode=docType.code",
+          "issueDate",
+          "effFrom",
+          "effTo",
+          "effStatus=effStatus.name",
+          "effStatusCode=effStatus.code",
+          "agencyName",
+          "organization=organization.name",
+          "applicationNote",
+          "documentIssues",
+          "documentFields",
+          "documentRelatedList",
+          "isConsolidatedDocument"
+        ]
+      },
+      "params": [
+        {
+          "name": "documentId",
+          "type": "string",
+          "required": true,
+          "description": "ID của văn bản trên vbpl.vn (VD: '37012' hoặc '183826')",
+          "example": "183826"
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "getDocumentFullText",
+      "description": "Lấy nội dung toàn văn của văn bản pháp luật theo documentId.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "0fb12b3561faa05adec51a82efb3e4f4f427f07b",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/chi-tiet/183826",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[\"{documentId}\"]"
+      },
+      "slots": [
+        {
+          "param": "documentId",
+          "at": ["body", "json:/0"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/chi-tiet/{documentId}"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "html",
+        "contentType": "text/html; charset=utf-8",
+        "html": {
+          "items": "html",
+          "fields": {
+            "header": ".docx-header",
+            "paragraphs": "all:p"
+          }
+        }
+      },
+      "params": [
+        {
+          "name": "documentId",
+          "type": "string",
+          "required": true,
+          "description": "ID của văn bản trên vbpl.vn (VD: '183826' hoặc '37012')",
+          "example": "183826"
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "getNewDocuments",
+      "description": "Lấy danh sách các văn bản pháp luật mới ban hành/cập nhật trên vbpl.vn.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "c529d164f28418e5898a834422629e64c6816af1",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[{\"sortDirection\":\"desc\",\"sortBy\":\"issueDate\",\"pageSize\":20,\"pageNumber\":1,\"isNew\":true}]"
+      },
+      "slots": [
+        {
+          "param": "pageNumber",
+          "at": ["body", "json:/0/pageNumber"]
+        },
+        {
+          "param": "pageSize",
+          "at": ["body", "json:/0/pageSize"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\{)"
+        },
+        "extract": "items",
+        "key": "id",
+        "pick": [
+          "id",
+          "docNum",
+          "title",
+          "issueDate",
+          "effFrom",
+          "effTo",
+          "effStatus=effStatus.name",
+          "docType=docType.name"
+        ]
+      },
+      "params": [
+        {
+          "name": "pageNumber",
+          "type": "number",
+          "required": false,
+          "default": 1,
+          "min": 1,
+          "example": 1
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "required": false,
+          "default": 20,
+          "min": 1,
+          "max": 50,
+          "example": 20
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "getComingSoonDocuments",
+      "description": "Lấy danh sách các văn bản pháp luật đã ban hành và sắp có hiệu lực thi hành (comingSoon: true).",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "c529d164f28418e5898a834422629e64c6816af1",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[{\"sortDirection\":\"desc\",\"sortBy\":\"issueDate\",\"pageSize\":20,\"pageNumber\":1,\"comingSoon\":true}]"
+      },
+      "slots": [
+        {
+          "param": "pageNumber",
+          "at": ["body", "json:/0/pageNumber"]
+        },
+        {
+          "param": "pageSize",
+          "at": ["body", "json:/0/pageSize"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\{)"
+        },
+        "extract": "items",
+        "key": "id",
+        "pick": [
+          "id",
+          "docNum",
+          "title",
+          "issueDate",
+          "effFrom",
+          "effTo",
+          "effStatus=effStatus.name",
+          "docType=docType.name"
+        ]
+      },
+      "params": [
+        {
+          "name": "pageNumber",
+          "type": "number",
+          "required": false,
+          "default": 1,
+          "min": 1,
+          "example": 1
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "required": false,
+          "default": 20,
+          "min": 1,
+          "max": 50,
+          "example": 20
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "getDocumentDiagram",
+      "description": "Lấy Lược đồ quan hệ pháp lý của một văn bản (documentNamesByType: văn bản mà văn bản này căn cứ/thay thế/sửa đổi; documentNamesBySource: văn bản hướng dẫn/sửa đổi/bổ sung/thay thế/hợp nhất văn bản này). Mã loại quan hệ: 1=Bãi bỏ, 3=Căn cứ, 4=Dẫn chiếu, 7=Hợp nhất, 8=Hướng dẫn áp dụng, 9=Quy định chi tiết/hướng dẫn thi hành, 10=Sửa đổi bổ sung, 12=Thay thế, 13=Bổ sung, 16=Sửa đổi.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "4a3423ce75290ef83a022333ee187acf4d38d3fb",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/chi-tiet/37012",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[\"{documentId}\"]"
+      },
+      "slots": [
+        {
+          "param": "documentId",
+          "at": ["body", "json:/0"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/chi-tiet/{documentId}"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\{)"
+        }
+      },
+      "params": [
+        {
+          "name": "documentId",
+          "type": "string",
+          "required": true,
+          "description": "ID của văn bản trên vbpl.vn (VD: '37012' hoặc UUID)",
+          "example": "37012"
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "getDocumentHistory",
+      "description": "Lấy lịch sử hiệu lực của văn bản (ngày ban hành, ngày có hiệu lực, các mốc sửa đổi/bổ sung/hết hiệu lực).",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "fe4862cb550ced8ac0057edfdf498bca2229be52",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/chi-tiet/37012",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[\"{documentId}\"]"
+      },
+      "slots": [
+        {
+          "param": "documentId",
+          "at": ["body", "json:/0"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/chi-tiet/{documentId}"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\[)"
+        }
+      },
+      "params": [
+        {
+          "name": "documentId",
+          "type": "string",
+          "required": true,
+          "description": "ID của văn bản trên vbpl.vn",
+          "example": "37012"
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "getDocumentProvisionsTree",
+      "description": "Lấy cây cấu trúc mục lục Chương / Điều / Khoản của văn bản pháp luật.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "94635012466e8fede44782d4237c10fe75501920",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/chi-tiet/187835",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[\"{documentId}\"]"
+      },
+      "slots": [
+        {
+          "param": "documentId",
+          "at": ["body", "json:/0"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/chi-tiet/{documentId}"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\[)"
+        }
+      },
+      "params": [
+        {
+          "name": "documentId",
+          "type": "string",
+          "required": true,
+          "description": "ID của văn bản trên vbpl.vn",
+          "example": "187835"
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "getConsolidatedGroups",
+      "description": "Lấy danh sách Văn bản hợp nhất (VBHN) và các văn bản thành phần được hợp nhất của một văn bản.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "0932c3801e9e99306fe7e694562e44ba55134662",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/chi-tiet/37012",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[\"{documentId}\"]"
+      },
+      "slots": [
+        {
+          "param": "documentId",
+          "at": ["body", "json:/0"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/chi-tiet/{documentId}"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\[)"
+        }
+      },
+      "params": [
+        {
+          "name": "documentId",
+          "type": "string",
+          "required": true,
+          "description": "ID của văn bản trên vbpl.vn",
+          "example": "37012"
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    },
+    {
+      "name": "listProvinces",
+      "description": "Liệt kê danh sách 34 Tỉnh/Thành phố trên vbpl.vn kèm UUID (id) và mã tỉnh (code) để tra cứu văn bản địa phương.",
+      "request": {
+        "method": "POST",
+        "url": "https://vbpl.vn/",
+        "headers": {
+          "accept": "text/x-component",
+          "content-type": "text/plain;charset=UTF-8",
+          "next-action": "5c3c7c777b9b200aea66ce1966340527ebd9f8a2",
+          "origin": "https://vbpl.vn",
+          "referer": "https://vbpl.vn/van-ban/dia-phuong",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"
+        },
+        "body": "[{\"areaLevel\":1,\"keyword\":\"{keyword}\"}]"
+      },
+      "slots": [
+        {
+          "param": "keyword",
+          "at": ["body", "json:/0/keyword"]
+        }
+      ],
+      "volatile": [],
+      "trigger": {
+        "url": "https://vbpl.vn/van-ban/dia-phuong"
+      },
+      "match": {
+        "method": "POST",
+        "host": "vbpl.vn",
+        "path": "/"
+      },
+      "response": {
+        "format": "embedded",
+        "contentType": "text/x-component",
+        "embedded": {
+          "regex": "(?:^|\\n)1:(\\{)"
+        },
+        "extract": "items",
+        "key": "id",
+        "pick": [
+          "id",
+          "code",
+          "name",
+          "effFrom",
+          "effTo"
+        ]
+      },
+      "params": [
+        {
+          "name": "keyword",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Tên tỉnh/thành phố cần lọc (để trống để lấy toàn bộ 34 tỉnh/thành)",
+          "example": "Đồng Tháp"
+        }
+      ],
+      "readOnly": true,
+      "minTier": 1,
+      "learnedLoggedIn": false,
+      "learnedAt": "2026-11-10T06:40:00.000Z"
+    }
+  ]
+}
