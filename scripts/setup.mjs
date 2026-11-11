@@ -21,8 +21,35 @@ const SPEC_DEST_DIR = join(homedir(), ".api-anything", "sites");
 const SPEC_DEST = join(SPEC_DEST_DIR, "vbpl.json");
 const SKILLS_SRC_DIR = join(ROOT_DIR, ".agents", "skills");
 const GLOBAL_SKILLS_DIR = join(homedir(), ".gemini", "config", "skills");
+const CLAUDE_SKILLS_DIR = join(homedir(), ".claude", "skills");
+const CODEX_SKILLS_DIR = join(homedir(), ".codex", "skills");
+
+function linkSkillsToDir(skills, targetDir, label) {
+  mkdirSync(targetDir, { recursive: true });
+  for (const skillName of skills) {
+    const srcPath = join(SKILLS_SRC_DIR, skillName);
+    const destPath = join(targetDir, skillName);
+    try {
+      const st = lstatSync(destPath);
+      if (st.isSymbolicLink() || st.isFile()) {
+        unlinkSync(destPath);
+      }
+    } catch {
+      // Destination does not exist yet
+    }
+    if (!existsSync(destPath)) {
+      symlinkSync(srcPath, destPath, "dir");
+    }
+    console.log(`✓ [${label}] Linked skill: ${skillName} -> ${destPath}`);
+  }
+}
 
 function main() {
+  const args = new Set(process.argv.slice(2));
+  const linkAll = args.has("--all-agents");
+  const forceClaude = linkAll || args.has("--claude") || existsSync(join(homedir(), ".claude"));
+  const forceCodex = linkAll || args.has("--codex") || existsSync(join(homedir(), ".codex"));
+
   console.log("=== [1/3] Checking api-anything engine ===");
   if (!existsSync(join(API_ANYTHING_DIR, "dist", "index.js"))) {
     if (!existsSync(API_ANYTHING_DIR)) {
@@ -47,26 +74,16 @@ function main() {
   console.log(`✓ Installed specs/vbpl.json -> ${SPEC_DEST}`);
 
   console.log("\n=== [3/3] Linking 5 VN Legal Skills ===");
-  mkdirSync(GLOBAL_SKILLS_DIR, { recursive: true });
   const skills = readdirSync(SKILLS_SRC_DIR).filter((name) =>
     existsSync(join(SKILLS_SRC_DIR, name, "SKILL.md"))
   );
 
-  for (const skillName of skills) {
-    const srcPath = join(SKILLS_SRC_DIR, skillName);
-    const destPath = join(GLOBAL_SKILLS_DIR, skillName);
-    try {
-      const st = lstatSync(destPath);
-      if (st.isSymbolicLink() || st.isFile()) {
-        unlinkSync(destPath);
-      }
-    } catch {
-      // Destination does not exist yet
-    }
-    if (!existsSync(destPath)) {
-      symlinkSync(srcPath, destPath, "dir");
-    }
-    console.log(`✓ Linked skill: ${skillName} -> ${destPath}`);
+  linkSkillsToDir(skills, GLOBAL_SKILLS_DIR, "Antigravity / Gemini");
+  if (forceClaude) {
+    linkSkillsToDir(skills, CLAUDE_SKILLS_DIR, "Claude Code");
+  }
+  if (forceCodex) {
+    linkSkillsToDir(skills, CODEX_SKILLS_DIR, "Codex CLI");
   }
 
   console.log("\n🎉 Setup complete! All 5 skills and VBPL engine are ready.");

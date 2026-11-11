@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/sotacom/vn-legal-360-skills.git"
   },
-  "homepage": "https://github.com/sotacom/vn-legal-360-skills#readme",
+  "homepage": "https://sotacom.github.io/vn-legal-360-skills/",
   "type": "module",
   "engines": {
     "node": ">=20.0.0"

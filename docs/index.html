@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VN Legal 360° Skills — Bộ 5 Agent Skills Pháp Luật Việt Nam trên vbpl.vn</title>
+    <meta
+      name="description"
+      content="Bộ 5 Agent Skills & CLI Engine giúp Antigravity, Claude Code, Cursor, Codex rà soát 360° văn bản quy phạm pháp luật Việt Nam trực tiếp từ vbpl.vn, kiểm toán trích dẫn 6 cổng, theo dõi biến động hàng tuần và xuất hồ sơ Word (.docx) chuẩn Nghị định 30/2020/NĐ-CP."
+    />
+    <meta property="og:title" content="VN Legal 360° Intelligence & Compliance Skills Suite" />
+    <meta
+      property="og:description"
+      content="Rà soát 8 trụ cột pháp lý từ vbpl.vn, chống nhầm Điều/Khoản Omnibus Decree, tính rủi ro thanh tra và xuất trọn bộ hồ sơ hành chính .docx chỉ với 1 Prompt cài đặt."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,600;1,6..72,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a href="#" class="brand">
+          <img src="./favicon.svg" alt="VN Legal 360 Logo" class="brand-icon" />
+          <span>VN Legal 360°</span>
+          <span class="brand-tag">v1.0 · MIT</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Điều hướng chính">
+          <a href="#install">Cài đặt 1-Prompt</a>
+          <a href="#skills">5 Skills</a>
+          <a href="#matrix">8 Trụ cột</a>
+          <a href="#qc">6 Cổng QC</a>
+          <a href="#casestudy">Case Study</a>
+          <a href="#examples">Ví dụ Prompt</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button id="theme-toggle" class="icon-btn" type="button" aria-label="Đổi giao diện Sáng/Tối">
+            ☀️
+          </button>
+          <a
+            href="https://github.com/sotacom/vn-legal-360-skills"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-sm btn-secondary"
+          >
+            ★ GitHub Repo
+          </a>
+          <a href="#install" class="btn btn-sm btn-primary">Cài đặt ngay</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="badge-row">
+              <span class="pill pill-gold">⚖️ CSDL Quốc gia vbpl.vn (Bộ Tư pháp)</span>
+              <span class="pill pill-emerald"><span class="pill-dot"></span>Powered by api-anything</span>
+              <span class="pill">Antigravity · Claude Code · Cursor · Codex</span>
+            </div>
+
+            <h1>
+              Biến AI Agent thành
+              <span class="accent-serif">Ban Pháp chế &amp; Kiểm toán Pháp lý 360°</span>
+              tại Việt Nam.
+            </h1>
+
+            <p class="hero-lead">
+              Không còn nỗi lo AI "bịa" số hiệu điều luật, trích văn bản hết hiệu lực hay nhầm Điều trong Nghị định sửa đổi nhiều nghị định.
+              <strong>vn-legal-360-skills</strong> kết nối trực tiếp <code>vbpl.vn</code> để leo Lược đồ hiệu lực, quét đủ
+              <strong>8 trụ cột tuân thủ</strong>, kiểm toán nguyên văn <strong>6 cổng cứng</strong> và xuất trọn bộ hồ sơ
+              <strong>Microsoft Word (<code>.docx</code>) chuẩn Nghị định 30/2020/NĐ-CP</strong>.
+            </p>
+
+            <div class="hero-cta">
+              <a href="#install" class="btn btn-primary">🚀 Copy 1 Prompt Để Cài Đặt</a>
+              <a href="#casestudy" class="btn btn-secondary">📖 Xem 2 Case Study Thực Chiến</a>
+              <a
+                href="https://github.com/sotacom/vn-legal-360-skills"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary"
+              >
+                Mã nguồn GitHub →
+              </a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-num">05</div>
+                <div class="stat-label">Agent Skills chuyên sâu</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">08</div>
+                <div class="stat-label">Trụ cột pháp lý bắt buộc</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">06</div>
+                <div class="stat-label">Cổng QC chống bịa trích dẫn</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">11</div>
+                <div class="stat-label">Operations trực tiếp vbpl.vn</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Pipeline Terminal Preview -->
+          <div class="terminal-card" aria-label="Minh họa luồng chạy thực tế">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span class="terminal-title">vn-legal-360-skills · Live Execution Pipeline</span>
+            </div>
+            <div class="terminal-body">
+              <div class="term-step">
+                <div class="term-prompt">💬 User Prompt:</div>
+                <div>
+                  "Tôi muốn mở phòng khám chuyên khoa Da liễu hoặc gia hạn cửa hàng trên đất ở tại tỉnh vừa sáp nhập. Rà soát 360° và lập bộ đơn đi nộp!"
+                </div>
+              </div>
+
+              <div class="term-step">
+                <div class="term-cmd">$ node scripts/vbpl-engine.mjs discover --slug ho-so --update-snapshot</div>
+                <div class="term-dim">→ Truy vấn vbpl.vn (Trung ương &amp; Địa phương) + Leo Lược đồ quan hệ hiệu lực...</div>
+                <div class="term-ok">✓ Đã lập đồ thị 38 văn bản qua đủ 8/8 Trụ cột (Đọc trọn luồng Flight &gt;500KB)</div>
+              </div>
+
+              <div class="term-step">
+                <div class="term-cmd">$ node scripts/vbpl-qc-audit.mjs audit --slug ho-so --live-recheck --verify-citations</div>
+                <div class="term-ok">✓ Gate 1..5: PASS (0 văn bản ảo, 0 văn bản hết hiệu lực bị trích nhầm)</div>
+                <div class="term-ok">✓ Gate 6 (Verbatim &amp; Omnibus): Khớp 100% cây Chương &gt; Điều &gt; Khoản</div>
+              </div>
+
+              <div class="term-step">
+                <div class="term-cmd">$ python3 scripts/docx-drafter.py --spec spec.json --out-dir ./HoSoNop</div>
+                <div class="term-ok">✓ Xuất 05 file .docx chuẩn Nghị định 30/2020/NĐ-CP + HTML Compliance Cockpit!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1-Prompt Installation Section -->
+      <section id="install" class="section section-alt">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Zero-Friction Onboarding</span>
+            <h2 class="section-title">Cài đặt vào AI Agent chỉ bằng 1 lần Copy Prompt</h2>
+            <p class="section-desc">
+              Không cần cấu hình thủ công phức tạp. Bạn chỉ việc <strong>mở một thư mục/project trống mới</strong> trong
+              Antigravity, Claude Code, Cursor hoặc Codex, chọn tab bên dưới rồi <strong>dán nguyên văn đoạn Prompt</strong> — AI sẽ tự tải GitHub, biên dịch engine và gắn trọn bộ 5 Skills cho bạn.
+            </p>
+          </div>
+
+          <div class="install-shell">
+            <div class="install-steps-bar">
+              <div class="mini-step">
+                <div class="mini-step-num">1</div>
+                <div class="mini-step-text">
+                  <strong>Tạo Project / Folder mới</strong>
+                  <span>Mở Antigravity, Claude Code, Cursor hoặc Codex ở một thư mục bất kỳ.</span>
+                </div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-num">2</div>
+                <div class="mini-step-text">
+                  <strong>Chọn công cụ &amp; Copy Prompt</strong>
+                  <span>Bấm nút "Sao chép Prompt Cài đặt" ở khung dưới đây rồi dán vào ô Chat.</span>
+                </div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-num">3</div>
+                <div class="mini-step-text">
+                  <strong>Chờ ~45 giây &amp; Bắt đầu hỏi luật</strong>
+                  <span>Agent tự chạy <code>npm run setup</code>, nạp <code>vbpl.json</code> và kích hoạt đủ 5 Skills!</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="agent-tabs" role="tablist" aria-label="Chọn công cụ AI Agent">
+              <button type="button" class="agent-tab active" data-agent-tab="antigravity" role="tab">
+                🚀 Google Antigravity <span class="rec-tag">Khuyên dùng</span>
+              </button>
+              <button type="button" class="agent-tab" data-agent-tab="claude" role="tab">
+                🤖 Claude Code
+              </button>
+              <button type="button" class="agent-tab" data-agent-tab="cursor" role="tab">
+                ⚡ Cursor IDE
+              </button>
+              <button type="button" class="agent-tab" data-agent-tab="codex" role="tab">
+                🛠️ Codex / Gemini CLI / Windsurf
+              </button>
+              <button type="button" class="agent-tab" data-agent-tab="cli" role="tab">
+                💻 Terminal Thủ công
+              </button>
+            </div>
+
+            <div class="install-panel">
+              <div class="install-meta">
+                <div class="install-meta-info">
+                  <h3 id="install-title">Cài đặt tự động trên Google Antigravity (Khuyên dùng)</h3>
+                  <p id="install-subtitle"></p>
+                </div>
+                <button id="copy-install-prompt-btn" type="button" class="btn btn-emerald">
+                  <span>📋 Sao chép Prompt Cài đặt</span>
+                </button>
+              </div>
+
+              <div class="prompt-box">
+                <pre id="install-prompt-text"></pre>
+              </div>
+
+              <div id="install-highlights" class="install-what-happens"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Normal AI Fails vs VN Legal 360 -->
+      <section id="why" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Giải quyết tận gốc điểm mù pháp lý</span>
+            <h2 class="section-title">Vì sao hỏi luật Việt Nam bằng AI thông thường rất dễ "sập bẫy"?</h2>
+            <p class="section-desc">
+              Văn bản quy phạm pháp luật Việt Nam có tính phân tầng chặt chẽ, thường xuyên sửa đổi qua các Nghị định tổng hợp (Omnibus) và phân cấp mạnh cho địa phương. Tìm kiếm web thông thường không thể nhìn thấy toàn cục.
+            </p>
+          </div>
+
+          <div class="compare-grid">
+            <div class="compare-card bad">
+              <h3>❌ Chat AI &amp; Web Search Thông Thường</h3>
+              <ul class="compare-list">
+                <li>
+                  <span class="mark">✕</span>
+                  <div>
+                    <strong>Chỉ tìm 1 từ khóa hẹp:</strong> Hỏi mở quán/cửa hàng thì chỉ trả lời giấy phép chuyên ngành, bỏ quên PCCC, đất đa mục đích, môi trường và hóa đơn máy tính tiền.
+                  </div>
+                </li>
+                <li>
+                  <span class="mark">✕</span>
+                  <div>
+                    <strong>Trích nhầm văn bản đã hết hiệu lực:</strong> Đọc lại bài viết cũ trên mạng mà không kiểm tra trạng thái hiệu lực thực tế hay điều khoản bãi bỏ cuối văn bản mới.
+                  </div>
+                </li>
+                <li>
+                  <span class="mark">✕</span>
+                  <div>
+                    <strong>Lệch số Điều trong Nghị định Omnibus:</strong> Đọc đoạn cắt rời (snippet) nên nhầm <code>Khoản 12 Điều 12</code> với <code>Khoản 12 Điều 13</code> khi một Nghị định sửa cùng lúc 4–8 Nghị định khác nhau.
+                  </div>
+                </li>
+                <li>
+                  <span class="mark">✕</span>
+                  <div>
+                    <strong>Bị cắt cụt văn bản dài &amp; Mù biểu mẫu:</strong> Không đọc được tới phần Phụ lục / Biểu mẫu ở cuối các bộ luật và nghị định dài trên <code>500KB</code>.
+                  </div>
+                </li>
+                <li>
+                  <span class="mark">✕</span>
+                  <div>
+                    <strong>Lúng túng trước sáp nhập tỉnh &amp; chính quyền 2 cấp:</strong> Vẫn hướng dẫn "nộp tại UBND cấp huyện" dù thẩm quyền đã chuyển về cấp Tỉnh hoặc Chủ tịch UBND cấp xã.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="compare-card good">
+              <h3>✅ Hệ sinh thái <code>vn-legal-360-skills</code></h3>
+              <ul class="compare-list">
+                <li>
+                  <span class="mark">✓</span>
+                  <div>
+                    <strong>Phân rã bắt buộc Ma trận 8 Trụ cột:</strong> Quét 360° từ Chủ thể &amp; Đất đai, Giấy phép con, QCVN &amp; PCCC, Đo lường, Thuế/Hóa đơn, Lao động, Môi trường/Tỉnh đến Mức phạt VPHC.
+                  </div>
+                </li>
+                <li>
+                  <span class="mark">✓</span>
+                  <div>
+                    <strong>Leo Lược đồ hiệu lực trực tiếp trên <code>vbpl.vn</code>:</strong> Tự động lần theo các nhánh <em>Sửa đổi, bổ sung</em>, <em>Thay thế</em>, <em>Hướng dẫn</em> và <em>Văn bản hợp nhất</em>.
+                  </div>
+                </li>
+                <li>
+                  <span class="mark">✓</span>
+                  <div>
+                    <strong>Định vị cây <code>Chương &gt; Điều &gt; Khoản</code> &amp; Gate 6 QC:</strong> Đọc toàn văn luồng Next.js Flight <code>&gt;500KB</code> (chuẩn Unicode NFC), tự động bắt lỗi lệch mục tiêu Omnibus Decree.
+                  </div>
+                </li>
+                <li>
+                  <span class="mark">✓</span>
+                  <div>
+                    <strong>Xử lý chuẩn địa bàn sáp nhập &amp; Chính quyền 2 cấp:</strong> Áp dụng đúng Luật Tổ chức CQĐP 2025 (Tỉnh – Xã/Phường) và quy tắc chuyển tiếp văn bản HĐND/UBND tỉnh cũ – mới.
+                  </div>
+                </li>
+                <li>
+                  <span class="mark">✓</span>
+                  <div>
+                    <strong>Bàn giao sản phẩm dùng ngay:</strong> Tạo Bảng điều khiển HTML tính rủi ro tiền phạt + Bộ 5 file Word <code>.docx</code> chuẩn Nghị định 30/2020/NĐ-CP sẵn sàng in đi nộp.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 Skills Suite -->
+      <section id="skills" class="section section-alt">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Kiến trúc 5 Kỹ năng Khép kín</span>
+            <h2 class="section-title">Bộ 5 Agent Skills &amp; CLI Engine hoạt động như thế nào?</h2>
+            <p class="section-desc">
+              Mỗi Skill đảm nhiệm một mắt xích chuyên biệt trong dây chuyền pháp chế — từ nghiên cứu toàn diện, kiểm toán đúp, giám sát định kỳ đến trực quan hóa và soạn thảo hồ sơ hành chính.
+            </p>
+          </div>
+
+          <div class="skills-grid">
+            <article class="skill-card">
+              <div class="skill-top">
+                <span class="skill-id">vn-legal-exhaustive-research</span>
+                <span class="skill-num">SKILL 01</span>
+              </div>
+              <h3>Rà soát Toàn diện 360° &amp; Leo Lược đồ</h3>
+              <p>
+                Tự động phân tách mọi câu hỏi/mô hình kinh doanh thành 8 trụ cột pháp lý, gọi 11 API của <code>vbpl.vn</code>, mở rộng Lược đồ văn bản liên quan và đọc toàn văn không cắt cụt để lập <code>compliance_playbook.md</code>.
+              </p>
+              <div class="skill-cmd">node scripts/vbpl-engine.mjs discover --slug &lt;chu-de&gt;</div>
+            </article>
+
+            <article class="skill-card">
+              <div class="skill-top">
+                <span class="skill-id">vn-legal-qc-auditor</span>
+                <span class="skill-num">SKILL 02</span>
+              </div>
+              <h3>Kiểm toán Pháp chế 2 Lớp (6 Gates + Red-Team)</h3>
+              <p>
+                Lớp 1 kiểm chứng tự động 6 cổng định lượng &amp; đối chiếu nguyên văn từng trích dẫn <code>Điểm/Khoản/Điều</code>. Lớp 2 gọi Subagent đóng vai "Đoàn Thanh tra Liên ngành Ảo" phản biện độc lập trước khi xuất bản.
+              </p>
+              <div class="skill-cmd">node scripts/vbpl-qc-audit.mjs audit --slug &lt;chu-de&gt; --verify-citations</div>
+            </article>
+
+            <article class="skill-card">
+              <div class="skill-top">
+                <span class="skill-id">vn-legal-watch-monitor</span>
+                <span class="skill-num">SKILL 03</span>
+              </div>
+              <h3>Radar Canh gác Biến động 3 Chiều Hàng tuần</h3>
+              <p>
+                Tự động quét mỗi sáng Thứ Hai (08:30): phát hiện thay đổi hiệu lực trên Lược đồ, văn bản Trung ương/Địa phương mới (<code>changesOnly</code>) và cảnh báo sớm 90 ngày văn bản sắp có hiệu lực (<code>CCHL</code>).
+              </p>
+              <div class="skill-cmd">node scripts/vbpl-watch.mjs scan --slug &lt;chu-de&gt;</div>
+            </article>
+
+            <article class="skill-card">
+              <div class="skill-top">
+                <span class="skill-id">vn-legal-visualizer</span>
+                <span class="skill-num">SKILL 04</span>
+              </div>
+              <h3>Sơ đồ Mermaid &amp; HTML Compliance Cockpit</h3>
+              <p>
+                Chuyển hóa hàng chục văn bản khô khan thành sơ đồ phả hệ pháp lý, lưu đồ cấp phép theo vòng đời và Bảng điều khiển HTML tương tác tự động tính Điểm tuân thủ (%) cùng Tổng rủi ro tiền phạt (VNĐ).
+              </p>
+              <div class="skill-cmd">→ Sinh tự động visual_cockpit.html &amp; Mermaid Diagrams</div>
+            </article>
+
+            <article class="skill-card">
+              <div class="skill-top">
+                <span class="skill-id">vn-legal-dossier-drafter</span>
+                <span class="skill-num">SKILL 05</span>
+              </div>
+              <h3>Soạn Trọn Bộ Hồ Sơ Đi Nộp Chuẩn <code>.docx</code></h3>
+              <p>
+                Xuất trực tiếp Đơn đề nghị theo biểu mẫu pháp định, Phương án khớp 1:1 các điểm <code>a, b, c, d, đ, e, g</code>, Công văn giải trình bảo lưu và Bảng kê nơi nộp đúng thể thức Nghị định 30/2020/NĐ-CP (không cần thư viện ngoài).
+              </p>
+              <div class="skill-cmd">python3 scripts/docx-drafter.py --spec spec.json --out-dir ./out</div>
+            </article>
+
+            <article class="skill-card" style="border-style: dashed; border-color: var(--border-strong);">
+              <div class="skill-top">
+                <span class="skill-id">specs/vbpl.json</span>
+                <span class="skill-num">CORE ENGINE</span>
+              </div>
+              <h3>Đặc tả Tier-1 cho CSDL Quốc gia <code>vbpl.vn</code></h3>
+              <p>
+                Bao gồm 11 operations chuyên sâu trên nền <code>api-anything</code>: tìm kiếm Trung ương &amp; 63/34 Tỉnh thành, lấy thuộc tính hiệu lực, Lược đồ quan hệ, lịch sử hiệu lực, cây mục lục Điều/Khoản và toàn văn.
+              </p>
+              <div class="skill-cmd">node scripts/vbpl-engine.mjs locate-citation --id 187157 --query "Điều 99"</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive 8-Pillar Explorer -->
+      <section id="matrix" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">8-Pillar 360° Legal Matrix</span>
+            <h2 class="section-title">Khám phá Ma trận 8 Trụ cột Pháp lý Bắt buộc</h2>
+            <p class="section-desc">
+              Bấm vào từng trụ cột bên dưới để xem cách hệ thống bóc tách toàn diện một hoạt động kinh doanh tại Việt Nam — không để lọt bất kỳ nghĩa vụ ngầm nào.
+            </p>
+          </div>
+
+          <div class="matrix-layout">
+            <div id="pillar-buttons" class="pillar-buttons" aria-label="Danh sách 8 trụ cột pháp lý"></div>
+            <div id="pillar-detail" class="pillar-detail" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6-Gate QC Auditor & Omnibus Protection -->
+      <section id="qc" class="section section-alt">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Dual-Layer Legal Quality Assurance</span>
+            <h2 class="section-title">Kiểm toán 6 Cổng Cứng &amp; Chống Bẫy "Omnibus Decree"</h2>
+            <p class="section-desc">
+              Không một bản tư vấn hay mẫu đơn <code>.docx</code> nào được phép bàn giao nếu chưa vượt qua công cụ định lượng <code>scripts/vbpl-qc-audit.mjs</code> và Subagent Thanh tra Phản biện Lớp 2.
+            </p>
+          </div>
+
+          <div class="gates-grid">
+            <div class="gate-card">
+              <span class="gate-badge">GATE 01</span>
+              <h4>Độ phủ 8 Trụ cột (<code>8-Pillar Coverage</code>)</h4>
+              <p>Đảm bảo cả 8 trụ cột từ P1 đến P8 đều có văn bản pháp luật đang còn hiệu lực điều chỉnh, không bỏ trống mảng nào.</p>
+            </div>
+            <div class="gate-card">
+              <span class="gate-badge">GATE 02</span>
+              <h4>Xác thực Live trên <code>vbpl.vn</code></h4>
+              <p>Đối chiếu trực tiếp mã <code>ItemID</code> và trạng thái hiệu lực thời gian thực trên CSDL Quốc gia, chặn tuyệt đối văn bản "ảo" do AI tự nghĩ ra.</p>
+            </div>
+            <div class="gate-card">
+              <span class="gate-badge">GATE 03</span>
+              <h4>Toàn vẹn Lược đồ Sửa đổi (<code>HHL1P</code>)</h4>
+              <p>Nếu văn bản gốc "Hết hiệu lực một phần", tự động kiểm tra nhánh <em>Sửa đổi, bổ sung</em> trên Lược đồ để không sót nghị định sửa đổi mới.</p>
+            </div>
+            <div class="gate-card">
+              <span class="gate-badge">GATE 04</span>
+              <h4>Chặn Trích dẫn Luật Hết Hiệu lực (<code>HHL</code>)</h4>
+              <p>Quét toàn bộ Playbook &amp; Đơn từ; báo lỗi <code>CRITICAL: FAIL</code> ngay lập tức nếu trích dẫn văn bản đã hết hiệu lực làm căn cứ hiện hành.</p>
+            </div>
+            <div class="gate-card">
+              <span class="gate-badge">GATE 05</span>
+              <h4>Hiệu lực Không gian Sau Sáp nhập Tỉnh</h4>
+              <p>Kiểm tra phân tích hiệu lực chuyển tiếp của Quyết định HĐND/UBND tỉnh cũ và tỉnh mới theo đúng Luật Ban hành VBQPPL 2025.</p>
+            </div>
+            <div class="gate-card gate-highlight">
+              <span class="gate-badge">GATE 06 · ĐỘT PHÁ</span>
+              <h4>Đối chiếu Nguyên văn &amp; Chặn Lệch Omnibus</h4>
+              <p>Bóc tách mọi cụm <code>Điểm... Khoản... Điều...</code> trong file nháp, dựng cây cấu trúc văn bản gốc và bắt sống lỗi trích nhầm sang Điều sửa đổi văn bản khác!</p>
+            </div>
+          </div>
+
+          <!-- Omnibus Visual Proof -->
+          <div class="omnibus-demo">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px;">
+              <div>
+                <strong style="color: #fbbf24; font-size: 1.02rem;">🔬 Minh họa Thực tế: Gate 6 bắt sống lỗi lệch Điều trong Nghị định Omnibus (49/2026/NĐ-CP)</strong>
+                <div style="font-size: 0.84rem; color: #94a3b8; margin-top: 3px;">
+                  Khi một Nghị định sửa đổi hàng loạt Nghị định khác nhau, các khoản con thường có câu chữ gần giống hệt nhau.
+                </div>
+              </div>
+              <span class="pill pill-emerald">verify-file Protection</span>
+            </div>
+
+            <div class="omnibus-cols">
+              <div class="omnibus-box wrong">
+                <div style="color: #f87171; font-weight: 700; margin-bottom: 6px;">❌ Dự thảo do LLM trích theo trí nhớ / snippet:</div>
+                <div>
+                  "...căn cứ theo <u>Điểm a Khoản 12 Điều 12 Nghị định số 49/2026/NĐ-CP</u> sửa đổi, bổ sung Điều 99 Nghị định số 102/2024/NĐ-CP..."
+                </div>
+                <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(248, 113, 113, 0.35); color: #fca5a5;">
+                  🚨 <strong>vbpl-qc-audit.mjs báo lỗi CRITICAL:</strong><br />
+                  <code>MISMATCHED_OMNIBUS_ARTICLE</code> — Điều 12 của NĐ 49/2026/NĐ-CP sửa đổi NĐ <strong>101/2024/NĐ-CP</strong>, KHÔNG phải NĐ 102/2024/NĐ-CP!
+                </div>
+              </div>
+
+              <div class="omnibus-box right">
+                <div style="color: #34d399; font-weight: 700; margin-bottom: 6px;">✅ Sau khi định vị bằng locate-citation &amp; Gate 6:</div>
+                <div>
+                  "...căn cứ theo <u>Điểm a Khoản 12 Điều 13 Nghị định số 49/2026/NĐ-CP</u> sửa đổi, bổ sung Điều 99 Nghị định số 102/2024/NĐ-CP..."
+                </div>
+                <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(52, 211, 153, 0.35); color: #6ee7b7;">
+                  ✓ <strong>Gate 6 VERIFIED (0 Errors):</strong><br />
+                  Khớp chính xác tiêu đề Điều cha (<em>"Điều 13. Sửa đổi, bổ sung một số điều của Nghị định số 102/2024/NĐ-CP"</em>) &amp; nội dung Điểm a Khoản 12.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Cockpit + Docx Preview -->
+      <section id="cockpit-docx" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Từ Nghiên cứu Đến Hành động Thực thi</span>
+            <h2 class="section-title">Trải nghiệm Thử Cockpit Tính Rủi ro Phạt &amp; Hồ sơ Word <code>.docx</code></h2>
+            <p class="section-desc">
+              Thử đánh dấu / bỏ đánh dấu các hạng mục bên trái để xem cách bảng điều khiển <code>vn-legal-visualizer</code> tính toán rủi ro thanh tra theo thời gian thực, và xem mẫu văn bản chuẩn Nghị định 30/2020/NĐ-CP bên phải.
+            </p>
+          </div>
+
+          <div class="showcase-split">
+            <!-- Interactive Mini Cockpit -->
+            <div class="cockpit-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <strong style="font-size: 1.05rem;">🎛️ Demo: Máy tính Tuân thủ &amp; Rủi ro Thanh tra</strong>
+                <span class="pill pill-gold">Tương tác trực tiếp</span>
+              </div>
+
+              <div class="cockpit-score-row">
+                <div class="score-tile">
+                  <span class="label">Điểm Tuân thủ Hiện tại</span>
+                  <span id="cockpit-score" class="val">67%</span>
+                </div>
+                <div class="score-tile">
+                  <span class="label">Tổng Rủi ro Phạt Tiềm ẩn (Tổ chức)</span>
+                  <span id="cockpit-risk" class="val">55.000.000 ₫</span>
+                </div>
+              </div>
+
+              <div class="progress-track">
+                <div id="cockpit-progress" class="progress-fill" style="width: 67%;"></div>
+              </div>
+
+              <div id="cockpit-items" class="check-items"></div>
+            </div>
+
+            <!-- Realistic NĐ 30/2020/NĐ-CP Word Document Preview -->
+            <div>
+              <div class="docx-paper" aria-label="Bản xem trước mẫu hồ sơ Word chuẩn Nghị định 30/2020/NĐ-CP">
+                <span class="docx-ribbon">.DOCX · NĐ 30/2020/NĐ-CP</span>
+                <div class="docx-quoc-hieu">
+                  <div class="qh-line1">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                  <div class="qh-line2">Độc lập - Tự do - Hạnh phúc</div>
+                </div>
+                <div class="docx-date">......, ngày ... tháng ... năm 2026</div>
+
+                <div class="docx-title">
+                  PHƯƠNG ÁN SỬ DỤNG ĐẤT KẾT HỢP ĐA MỤC ĐÍCH
+                </div>
+                <div class="docx-sub">
+                  (Lập theo quy định tại Điều 218 Luật Đất đai 2024, Điều 99 Nghị định số 102/2024/NĐ-CP và Điểm a Khoản 12 Điều 13 Nghị định số 49/2026/NĐ-CP)
+                </div>
+
+                <div class="docx-clause">
+                  <strong>Kính gửi:</strong> Ủy ban nhân dân xã/phường ........................ (qua Trung tâm Phục vụ hành chính công)
+                </div>
+                <div class="docx-clause">
+                  <strong>1. Thông tin về thửa đất, khu đất đang sử dụng (Điểm a):</strong> Thửa đất số [...], tờ bản đồ số [...], mục đích sử dụng chính theo Giấy chứng nhận: Đất ở; mục đích sử dụng kết hợp đề nghị đăng ký: Thương mại, dịch vụ...
+                </div>
+                <div class="docx-clause">
+                  <strong>2. Diện tích, ranh giới sử dụng vào mục đích kết hợp (Điểm b):</strong> Diện tích phần kết hợp đảm bảo không làm thay đổi loại đất theo phân loại đất và giữ nguyên hiện trạng công trình đã được cấp GPXD, nghiệm thu PCCC...
+                </div>
+                <div class="docx-clause">
+                  <strong>3. Giải pháp bảo vệ môi trường, PCCC &amp; an toàn giao thông (Điểm đ, e, g):</strong> Đã trang bị đầy đủ hệ thống thu gom chất thải nguy hại, phương án CNCH tại chỗ...
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 16px; font-size: 0.8rem;">
+                  <div>
+                    <em><strong>Nơi nhận:</strong></em><br />
+                    - Như trên;<br />
+                    - Lưu: Hồ sơ.
+                  </div>
+                  <div style="text-align: center;">
+                    <strong>NGƯỜI SỬ DỤNG ĐẤT</strong><br />
+                    <em>(Ký, ghi rõ họ tên)</em>
+                  </div>
+                </div>
+
+                <div class="docx-files-strip">
+                  <span>📄 01_Don_De_Nghi.docx</span>
+                  <span>📄 02_Phuong_An_Chi_Tiet.docx</span>
+                  <span>📄 03_Cong_Van_Giai_Trinh.docx</span>
+                  <span>📄 04_Bien_Ban_Xac_Nhan.docx</span>
+                  <span>📄 05_Bang_Ke_Va_Noi_Nop.docx</span>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 12px; text-align: center;">
+                * Định dạng chuẩn A4: Lề trái 30mm, phải 15mm, trên/dưới 20mm, phông <code>Times New Roman 13pt</code> — xuất trực tiếp bằng Python chuẩn (không cần cài thư viện ngoài).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Case Studies Section -->
+      <section id="casestudy" class="section section-alt">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Thực chiến Pháp lý Chuyên sâu</span>
+            <h2 class="section-title">Case Studies: Khi 5 Agent Skills Giải Quyết Các Ca Pháp Lý Phức Tạp</h2>
+            <p class="section-desc">
+              Hai tình huống điển hình (đã tổng quát hóa &amp; ẩn danh hoàn toàn thông tin riêng tư) cho thấy sự khác biệt giữa trả lời lý thuyết chung chung và giải pháp pháp chế thực chiến.
+            </p>
+          </div>
+
+          <div class="case-tabs" role="tablist">
+            <button type="button" class="case-tab active" data-case-tab="case1">
+              ⛽ Case Study #01: Đất ở Kết hợp Thương mại &amp; Gia hạn Giấy phép Cơ sở Lâu năm (Tỉnh Sau Sáp nhập)
+            </button>
+            <button type="button" class="case-tab" data-case-tab="case2">
+              🏥 Case Study #02: Rà soát 360° &amp; Cockpit Thanh tra cho Phòng khám Chuyên khoa Da liễu
+            </button>
+          </div>
+
+          <div id="case-study-content" class="case-panel" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- Ready-to-Use Prompt Examples -->
+      <section id="examples" class="section">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-eyebrow">Copy &amp; Chạy Ngay Sau Khi Cài Đặt</span>
+            <h2 class="section-title">Ví dụ các Câu lệnh (Prompts) Thực tế Cho Doanh nghiệp &amp; Luật sư</h2>
+            <p class="section-desc">
+              Sau khi cài đặt xong <code>vn-legal-360-skills</code>, bạn chỉ cần nói bằng tiếng Việt tự nhiên như làm việc với Trưởng phòng Pháp chế. Bấm sao chép bất kỳ ví dụ nào dưới đây để thử ngay!
+            </p>
+          </div>
+
+          <div class="examples-grid">
+            <div class="example-card">
+              <div class="example-head">
+                <span class="example-tag">1. Rà soát 360° Mở Cơ sở Mới</span>
+                <button type="button" class="btn btn-sm btn-secondary" data-copy-target="ex-prompt-1">📋 Copy</button>
+              </div>
+              <h3>Mở Phòng khám / Quán Gaming / Nhà hàng / Kho xưởng</h3>
+              <div id="ex-prompt-1" class="example-prompt">
+                Tôi chuẩn bị mở một Phòng khám chuyên khoa Da liễu (hoặc trung tâm chăm sóc da có dùng máy laser) tại TP. Hồ Chí Minh. Hãy dùng bộ skill pháp luật 360° rà soát tất tần tật 8 trụ cột trên vbpl.vn, chạy kiểm toán 6 cổng QC và xuất cho tôi Cẩm nang tuân thủ kèm Bảng điều khiển HTML tính rủi ro tiền phạt để tôi tự rà soát trước khi đón đoàn thẩm định!
+              </div>
+              <div class="example-result">
+                <strong>Kết quả nhận được:</strong> Đồ thị <code>legal_graph.json</code> + <code>compliance_playbook.md</code> + Báo cáo QC <code>PASS</code> + Giao diện tương tác <code>visual_cockpit.html</code>.
+              </div>
+            </div>
+
+            <div class="example-card">
+              <div class="example-head">
+                <span class="example-tag">2. Lập Bộ Hồ sơ .DOCX Đi Nộp</span>
+                <button type="button" class="btn btn-sm btn-secondary" data-copy-target="ex-prompt-2">📋 Copy</button>
+              </div>
+              <h3>Soạn Đơn đề nghị, Phương án Đất Đa mục đích &amp; Công văn Giải trình</h3>
+              <div id="ex-prompt-2" class="example-prompt">
+                Gia đình tôi có thửa đất ở đã xây cửa hàng kinh doanh hợp pháp hơn 10 năm (có Giấy phép xây dựng và Nghiệm thu PCCC), nay cần đăng ký sử dụng đất ở kết hợp thương mại dịch vụ theo Điều 218 Luật Đất đai 2024 để gia hạn giấy phép chuyên ngành tại tỉnh vừa sáp nhập. Hãy kiểm tra quy định mới nhất, chạy Gate 6 kiểm chứng điều khoản và xuất trọn bộ file Word (.docx) chuẩn Nghị định 30/2020/NĐ-CP kèm hướng dẫn nộp ở đâu!
+              </div>
+              <div class="example-result">
+                <strong>Kết quả nhận được:</strong> Trọn bộ 05 file <code>.docx</code> (Đơn đề nghị, Phương án khớp điểm <code>a–g</code>, Công văn giải trình, Biên bản xác nhận, Bảng kê &amp; nơi nộp).
+              </div>
+            </div>
+
+            <div class="example-card">
+              <div class="example-head">
+                <span class="example-tag">3. Kiểm toán Văn bản Sẵn có</span>
+                <button type="button" class="btn btn-sm btn-secondary" data-copy-target="ex-prompt-3">📋 Copy</button>
+              </div>
+              <h3>Bắt lỗi Trích dẫn Sai / Luật Hết Hiệu lực Trong Dự thảo Đơn từ</h3>
+              <div id="ex-prompt-3" class="example-prompt">
+                Tôi đang có sẵn file dự thảo công văn giải trình gửi Sở chuyên ngành tại ./du_thao_cong_van.md. Hãy dùng skill vn-legal-qc-auditor (chế độ verify-file) đối chiếu nguyên văn từng Điểm, Khoản, Điều với vbpl.vn xem có điều luật nào đã hết hiệu lực, bị bãi bỏ một phần cuối văn bản mới hoặc bị lệch số Điều trong Nghị định Omnibus không, sau đó sửa lại cho chuẩn 100%!
+              </div>
+              <div class="example-result">
+                <strong>Kết quả nhận được:</strong> Biên bản kiểm toán từng trích dẫn + Cảnh báo lỗi Omnibus/HHL + Bản sửa hoàn chỉnh đạt <code>0</code> lỗi.
+              </div>
+            </div>
+
+            <div class="example-card">
+              <div class="example-head">
+                <span class="example-tag">4. Tự động Theo dõi Hàng Tuần</span>
+                <button type="button" class="btn btn-sm btn-secondary" data-copy-target="ex-prompt-4">📋 Copy</button>
+              </div>
+              <h3>Bật Radar Quét Văn bản Mới Mỗi Sáng Thứ Hai</h3>
+              <div id="ex-prompt-4" class="example-prompt">
+                Hãy dùng skill vn-legal-watch-monitor thiết lập lịch tự động quét vào 08:30 sáng Thứ Hai hàng tuần cho hồ sơ pháp lý ngành kinh doanh của tôi. Mỗi khi Chính phủ, Bộ chuyên ngành hoặc UBND tỉnh ban hành văn bản mới hay sửa đổi Lược đồ hiệu lực, hãy tóm tắt rõ: (1) Cần làm thêm gì, (2) Bớt được thủ tục gì, (3) Thay đổi thẩm quyền/mức phạt ra sao và (4) Quy định chuyển tiếp!
+              </div>
+              <div class="example-result">
+                <strong>Kết quả nhận được:</strong> File cấu hình Scheduled Sidecar + Báo cáo biến động <code>latest_delta.json</code> phân tích 4 nhóm hành động.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div>
+            <strong style="color: var(--text); font-size: 1rem;">VN Legal 360° Intelligence &amp; Compliance Skills Suite</strong>
+            <p style="margin: 6px 0 0; max-width: 680px;">
+              🔒 <strong>Cam kết Quyền riêng tư:</strong> Repository được cấu hình <code>.gitignore</code> chặt chẽ để loại trừ hoàn toàn mọi hồ sơ cá nhân trong <code>dossiers/*</code> và tệp <code>*.docx</code> khỏi Git. Nguồn dữ liệu tra cứu trực tiếp từ CSDL Quốc gia về văn bản pháp luật (<a href="https://vbpl.vn" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">vbpl.vn</a> – Bộ Tư pháp).
+            </p>
+          </div>
+
+          <div class="footer-links">
+            <a href="https://github.com/sotacom/vn-legal-360-skills" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+            <a href="https://github.com/sotacom/vn-legal-360-skills/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
+            <a href="https://github.com/goodnight000/api-anything" target="_blank" rel="noopener noreferrer">api-anything</a>
+            <a href="https://vbpl.vn" target="_blank" rel="noopener noreferrer">vbpl.vn</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Copy Toast -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

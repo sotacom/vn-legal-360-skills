@@ -3,6 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Powered by api-anything](https://img.shields.io/badge/Powered%20by-api--anything-10b981.svg)](https://github.com/goodnight000/api-anything)
 [![Data Source: vbpl.vn](https://img.shields.io/badge/Data%20Source-vbpl.vn-ef4444.svg)](https://vbpl.vn)
+[![GitHub Pages](https://img.shields.io/badge/Landing%20Page-Live%20Demo%20%26%20Docs-f59e0b.svg)](https://sotacom.github.io/vn-legal-360-skills/)
+
+> 🌐 **Trang giới thiệu tương tác, Case Study thực chiến & Copy-Prompt Installer**: **[https://sotacom.github.io/vn-legal-360-skills/](https://sotacom.github.io/vn-legal-360-skills/)**
 
 Bộ **5 Agent Skills** và **CLI Engine** chuyên sâu giúp AI Agent rà soát toàn diện **360° tất cả văn bản quy phạm pháp luật hiện hành tại Việt Nam** (Trung ương & Địa phương) trực tiếp từ **Cơ sở dữ liệu Quốc gia về văn bản pháp luật (`https://vbpl.vn`)** thông qua [`api-anything`](https://github.com/goodnight000/api-anything), tự động leo Lược đồ hiệu lực, kiểm toán chất lượng pháp chế 2 lớp (6 cổng kiểm chứng định lượng & đối chiếu nguyên văn từng Điều/Khoản), theo dõi biến động định kỳ hàng tuần, trực quan hóa bằng Bảng điều khiển HTML tương tác và xuất trọn bộ hồ sơ hành chính chuẩn thể thức Microsoft Word (`.docx`) theo **Nghị định số 30/2020/NĐ-CP**.
 
@@ -55,6 +58,7 @@ Bộ **5 Agent Skills** và **CLI Engine** chuyên sâu giúp AI Agent rà soát
 ├── examples/
 │   ├── profile.template.json                       # Mẫu cấu hình chủ đề 8 trụ cột
 │   └── dossier_docx_spec.template.json             # Mẫu đặc tả xuất bộ hồ sơ Word (.docx)
+├── docs/                                           # GitHub Pages Landing Page (Interactive Demo, Case Studies & 1-Prompt Installer)
 ├── dossiers/
 │   └── .gitkeep                                    # Thư mục lưu các hồ sơ chủ đề của người dùng (được gitignore)
 ├── package.json
@@ -71,7 +75,14 @@ Bộ **5 Agent Skills** và **CLI Engine** chuyên sâu giúp AI Agent rà soát
 - **Python 3** `>= 3.8` (chỉ dùng thư viện chuẩn có sẵn của Python để xuất file `.docx`)
 - **Git**
 
-### Cài đặt trong 1 lệnh
+### Cách 1: Cài đặt tự động chỉ bằng 1 Prompt (Antigravity / Claude Code / Cursor / Codex)
+Chỉ cần mở một thư mục Project trống mới trong công cụ AI Agent của bạn và dán nguyên văn đoạn Prompt sau (hoặc chọn Prompt riêng cho từng công cụ trên [Landing Page](https://sotacom.github.io/vn-legal-360-skills/#install)):
+
+```text
+Hãy tải bộ công cụ pháp luật Việt Nam 360° từ https://github.com/sotacom/vn-legal-360-skills.git về thư mục hiện tại, chạy lệnh `npm run setup -- --all-agents` để tự động cài đặt `api-anything`, nạp đặc tả `vbpl.json` vào `~/.api-anything/sites/vbpl.json` và gắn trọn bộ 5 skills pháp luật Việt Nam vào cấu hình Agent của tôi, đồng thời kết nối MCP server `api-anything` (`node <đường-dẫn>/api-anything/dist/index.js`) rồi báo cho tôi biết khi sẵn sàng!
+```
+
+### Cách 2: Cài đặt qua Terminal trong 1 lệnh
 ```bash
 git clone https://github.com/sotacom/vn-legal-360-skills.git
 cd vn-legal-360-skills
@@ -80,7 +91,7 @@ npm run setup
 Lệnh `npm run setup` sẽ tự động:
 1. Tải và biên dịch [`api-anything`](https://github.com/goodnight000/api-anything) vào `./api-anything` (nếu chưa có);
 2. Cài đặt đặc tả `specs/vbpl.json` vào `~/.api-anything/sites/vbpl.json`;
-3. Liên kết (symlink) cả **5 skills** vào `~/.gemini/config/skills/` để bạn có thể gọi từ bất kỳ workspace nào.
+3. Liên kết (symlink) cả **5 skills** vào `~/.gemini/config/skills/` (và tự động liên kết thêm vào `~/.claude/skills/`, `~/.codex/skills/` nếu có hoặc khi truyền cờ `-- --all-agents`) để bạn có thể gọi từ bất kỳ workspace nào.
 
 ---
 
