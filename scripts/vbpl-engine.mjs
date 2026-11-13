@@ -108,28 +108,52 @@ export async function callVbpl(op, args) {
  * appendices, forms, and final repeal/transitional clauses).
  */
 export async function fetchFullDocumentStream(documentId) {
-  const res = await fetch("https://vbpl.vn/", {
-    method: "POST",
-    headers: {
-      "Next-Action": "0fb12b3561faa05adec51a82efb3e4f4f427f07b",
-      "Content-Type": "text/plain;charset=UTF-8"
-    },
-    body: JSON.stringify([String(documentId)])
-  });
-  const raw = await res.text();
-  const pMatches = [...raw.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)];
-  let paragraphs = pMatches
-    .map((m) =>
-      m[1]
-        .replace(/\\n|\\r|\\t/g, " ")
-        .replace(/\\"/g, '"')
-        .replace(/<[^>]+>/g, " ")
-        .replace(/&nbsp;/g, " ")
-        .replace(/\s+/g, " ")
-        .trim()
-        .normalize("NFC")
-    )
-    .filter(Boolean);
+  const cacheDir = join(ROOT_DIR, ".cache", "vbpl_fulltext");
+  mkdirSync(cacheDir, { recursive: true });
+  const cacheFile = join(cacheDir, `${String(documentId)}.json`);
+  if (existsSync(cacheFile)) {
+    try {
+      const cached = JSON.parse(readFileSync(cacheFile, "utf8"));
+      if (Array.isArray(cached) && cached.length > 0) return cached;
+    } catch {
+      // ignore corrupt cache
+    }
+  }
+
+  let paragraphs = [];
+  for (let attempt = 0; attempt < 4; attempt++) {
+    if (attempt > 0) await sleep(800 * attempt);
+    try {
+      const res = await fetch("https://vbpl.vn/", {
+        method: "POST",
+        headers: {
+          "Next-Action": "0fb12b3561faa05adec51a82efb3e4f4f427f07b",
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        body: JSON.stringify([String(documentId)])
+      });
+      const raw = await res.text();
+      const pMatches = [...raw.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)];
+      paragraphs = pMatches
+        .map((m) =>
+          m[1]
+            .replace(/\\n|\\r|\\t/g, " ")
+            .replace(/\\"/g, '"')
+            .replace(/<[^>]+>/g, " ")
+            .replace(/&nbsp;/g, " ")
+            .replace(/\s+/g, " ")
+            .trim()
+            .normalize("NFC")
+        )
+        .filter(Boolean);
+      if (paragraphs.length > 0) {
+        writeFileSync(cacheFile, JSON.stringify(paragraphs));
+        break;
+      }
+    } catch {
+      // retry on transient network error
+    }
+  }
 
   if (paragraphs.length === 0) {
     const fallback = await callVbpl("getDocumentFullText", { documentId: String(documentId) });

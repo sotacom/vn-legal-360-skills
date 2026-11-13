@@ -23,3 +23,4 @@ ThuTucDatDaiXD/
 *.log
 tmp/
 scratch/
+.cache/

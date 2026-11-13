@@ -125,48 +125,61 @@ def build_docx(filepath, elements):
             if el.get("subtitle"):
                 body_parts.append(make_p(make_run(el["subtitle"], bold=True, italic=True, sz=26), align="center", before=0, after=140))
 
-        elif etype == "p":
+        elif etype == "kinh_gui":
             body_parts.append(
                 make_p(
-                    make_run(
-                        el.get("text", ""),
-                        bold=el.get("bold", False),
-                        italic=el.get("italic", False),
-                        underline=el.get("underline", False),
-                        sz=el.get("sz", 26),
-                    ),
-                    align=el.get("align", "both"),
-                    before=el.get("before", 70),
-                    after=el.get("after", 70),
-                    first_line=420 if el.get("indent", False) else 0,
+                    make_run(el.get("text", ""), bold=True, sz=el.get("sz", 26)),
+                    align=el.get("align", "center"),
+                    before=el.get("before", 100),
+                    after=el.get("after", 120),
                 )
             )
 
-        elif etype == "runs_p":
-            r_xml = "".join(
-                make_run(
-                    r.get("text", ""),
-                    bold=r.get("bold", False),
-                    italic=r.get("italic", False),
-                    underline=r.get("underline", False),
-                    sz=r.get("sz", 26),
+        elif etype == "heading":
+            body_parts.append(
+                make_p(
+                    make_run(el.get("text", ""), bold=True, underline=el.get("underline", False), sz=el.get("sz", 26)),
+                    align=el.get("align", "left"),
+                    before=el.get("before", 140),
+                    after=el.get("after", 80),
                 )
-                for r in el.get("runs", [])
             )
+
+        elif etype in ("p", "runs_p"):
+            first_line = el.get("first_line", 420 if el.get("indent", False) else 0)
+            if "runs" in el and isinstance(el["runs"], list):
+                r_xml = "".join(
+                    make_run(
+                        r.get("text", ""),
+                        bold=r.get("bold", el.get("bold", False)),
+                        italic=r.get("italic", el.get("italic", False)),
+                        underline=r.get("underline", el.get("underline", False)),
+                        sz=r.get("sz", el.get("sz", 26)),
+                    )
+                    for r in el["runs"]
+                )
+            else:
+                r_xml = make_run(
+                    el.get("text", ""),
+                    bold=el.get("bold", False),
+                    italic=el.get("italic", False),
+                    underline=el.get("underline", False),
+                    sz=el.get("sz", 26),
+                )
             body_parts.append(
                 make_p(
                     r_xml,
                     align=el.get("align", "both"),
                     before=el.get("before", 70),
                     after=el.get("after", 70),
-                    first_line=420 if el.get("indent", False) else 0,
+                    first_line=first_line,
                 )
             )
 
         elif etype == "table":
             headers = el.get("headers", [])
             rows = el.get("rows", [])
-            col_pcts = el.get("col_pcts", [int(5000 / max(1, len(headers)))] * len(headers))
+            col_pcts = el.get("col_pcts") or el.get("col_widths") or [int(5000 / max(1, len(headers)))] * len(headers)
             tr_list = []
             th_cells = []
             for idx, h in enumerate(headers):
@@ -207,10 +220,10 @@ def build_docx(filepath, elements):
             </w:tbl>
             """)
 
-        elif etype == "signature":
+        elif etype in ("signature", "signature_single"):
             left_lines = el.get("left_lines", [])
-            right_title = el.get("right_title", "NGƯỜI LÀM ĐƠN")
-            right_sub = el.get("right_sub", "(Ký, ghi rõ họ tên và đóng dấu nếu có)")
+            right_title = el.get("right_title") or el.get("title") or "NGƯỜI LÀM ĐƠN"
+            right_sub = el.get("right_sub") or el.get("subtitle") or "(Ký, ghi rõ họ tên và đóng dấu nếu có)"
             left_xml = ""
             if left_lines:
                 left_xml += make_p(make_run("Nơi nhận / Ghi chú:", bold=True, italic=True, sz=24), align="left", before=40, after=20)
